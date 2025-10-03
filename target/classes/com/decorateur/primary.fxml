@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="com.decorateur.PrimaryController" 
+            fitToWidth="true" 
+            hbarPolicy="NEVER" 
+            vbarPolicy="AS_NEEDED"
+            style="-fx-background-color: #f5f5dc; -fx-background: #f5f5dc;">
+   <content>
+      <VBox spacing="15.0" style="-fx-background-color: #f5f5dc;">
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+         
+         <children>
+      <!-- Titre -->
+      <Label text="☕ Café Décorateur" style="-fx-text-fill: #6b4423;">
+         <font>
+            <Font name="System Bold" size="32.0" />
+         </font>
+      </Label>
+      
+      <Label text="Choisissez votre boisson et vos suppléments" style="-fx-text-fill: #8b6536;">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      
+      <Separator />
+      
+      <!-- Section Boissons de base -->
+      <Label text="1. Choisissez votre boisson de base :" style="-fx-text-fill: #6b4423; -fx-font-weight: bold;">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      
+      <VBox spacing="10.0">
+         <fx:define>
+            <ToggleGroup fx:id="boissonGroup" />
+         </fx:define>
+         
+         <RadioButton fx:id="espressoRadio" text="Espresso - 4.00 €" toggleGroup="$boissonGroup" selected="true" style="-fx-font-size: 14px;" />
+         <RadioButton fx:id="decaRadio" text="Déca - 5.00 €" toggleGroup="$boissonGroup" style="-fx-font-size: 14px;" />
+         <RadioButton fx:id="sumatraRadio" text="Sumatra - 6.00 €" toggleGroup="$boissonGroup" style="-fx-font-size: 14px;" />
+      </VBox>
+      
+      <Separator />
+      
+      <!-- Section Suppléments -->
+      <Label text="2. Ajoutez vos suppléments (décorateurs) :" style="-fx-text-fill: #6b4423; -fx-font-weight: bold;">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      
+      <VBox spacing="15.0">
+         <!-- Chocolat -->
+         <HBox spacing="10.0" alignment="CENTER_LEFT" style="-fx-background-color: white; -fx-padding: 10px; -fx-border-color: #d3d3d3; -fx-border-width: 1px; -fx-border-radius: 5px; -fx-background-radius: 5px;">
+            <Label text="🍫 Chocolat" prefWidth="150.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" />
+            <Label text="1.20 € / unité" prefWidth="100.0" style="-fx-font-size: 12px; -fx-text-fill: #666;" />
+            <Button text="-" onAction="#diminuerChocolat" prefWidth="40.0" prefHeight="35.0"
+                    style="-fx-background-color: #ff6b6b; -fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;" />
+            <Label fx:id="chocolatQteLabel" text="0" prefWidth="30.0" alignment="CENTER"
+                   style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #6b4423;" />
+            <Button text="+" onAction="#augmenterChocolat" prefWidth="40.0" prefHeight="35.0"
+                    style="-fx-background-color: #51cf66; -fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;" />
+         </HBox>
+         
+         <!-- Caramel -->
+         <HBox spacing="10.0" alignment="CENTER_LEFT" style="-fx-background-color: white; -fx-padding: 10px; -fx-border-color: #d3d3d3; -fx-border-width: 1px; -fx-border-radius: 5px; -fx-background-radius: 5px;">
+            <Label text="🍯 Caramel" prefWidth="150.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" />
+            <Label text="0.80 € / unité" prefWidth="100.0" style="-fx-font-size: 12px; -fx-text-fill: #666;" />
+            <Button text="-" onAction="#diminuerCaramel" prefWidth="40.0" prefHeight="35.0"
+                    style="-fx-background-color: #ff6b6b; -fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;" />
+            <Label fx:id="caramelQteLabel" text="0" prefWidth="30.0" alignment="CENTER"
+                   style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #6b4423;" />
+            <Button text="+" onAction="#augmenterCaramel" prefWidth="40.0" prefHeight="35.0"
+                    style="-fx-background-color: #51cf66; -fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;" />
+         </HBox>
+      </VBox>
+      
+      <Separator />
+      
+      <!-- Affichage du prix en temps réel -->
+      <VBox spacing="5.0" style="-fx-background-color: #fff8dc; -fx-padding: 15px; -fx-border-color: #8b6536; -fx-border-width: 2px; -fx-border-radius: 5px; -fx-background-radius: 5px;">
+         <Label text=" Prix final :" style="-fx-text-fill: #6b4423; -fx-font-weight: bold;">
+            <font>
+               <Font size="16.0" />
+            </font>
+         </Label>
+         <Label fx:id="prixLabel" text="0.00 €" style="-fx-text-fill: #d2691e; -fx-font-weight: bold;">
+            <font>
+               <Font size="28.0" />
+            </font>
+         </Label>
+      </VBox>
+      
+      <Separator />
+      
+      <!-- Boutons d'action -->
+      <HBox spacing="15.0" alignment="CENTER">
+         <Button text="Commander ☕" onAction="#commander" prefWidth="150.0" 
+                 style="-fx-background-color: #6b4423; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 10px;" />
+         <Button text="Réinitialiser" onAction="#reinitialiser" prefWidth="150.0"
+                 style="-fx-background-color: #d2691e; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 10px;" />
+         <Button text="Effacer historique" onAction="#effacerHistorique" prefWidth="150.0"
+                 style="-fx-background-color: #888; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 10px;" />
+      </HBox>
+      
+      <Separator />
+      
+      <!-- Historique des commandes avec scroll -->
+      <Label text="📜 Historique des commandes :" style="-fx-text-fill: #6b4423; -fx-font-weight: bold;">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      
+      <TextArea fx:id="historiqueArea" prefHeight="200.0" editable="false" wrapText="true"
+                style="-fx-control-inner-background: #fafafa; -fx-border-color: #8b6536; -fx-border-width: 2px; -fx-font-size: 12px; -fx-font-family: 'Courier New';" 
+                promptText="Aucune commande passée pour le moment..." />
+         </children>
+      </VBox>
+   </content>
+</ScrollPane>
